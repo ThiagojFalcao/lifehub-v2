@@ -10,6 +10,8 @@
 
 **Spec:** `docs/superpowers/specs/2026-09-23-fundacao-lifehub-v2-design.md`
 
+**Progresso (2026-09-23):** Tasks 1–8 concluídas (commits `039115e..a92ef95`; CI verde). Próxima: **Task 9 — Documentação final**. Ledger local: `.superpowers/sdd/2026-09-23-fundacao-lifehub-v2/progress.md`.
+
 ## Global Constraints
 
 - Node 22 LTS (Hermes-managed, `C:\Users\Usuario\AppData\Local\hermes\node`), npm 10. Windows + PowerShell 5.1 no ambiente do criador.

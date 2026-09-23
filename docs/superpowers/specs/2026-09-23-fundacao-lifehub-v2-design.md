@@ -1,7 +1,7 @@
 # LifeHub V2 — Spec do Ciclo 1: Fundação
 
 **Data:** 2026-09-23
-**Status:** Aguardando revisão do criador
+**Status:** Aprovada em 2026-09-23 — implementação em andamento (Tasks 1–8 de 11 concluídas; CI verde)
 **Ciclo:** 1 de 3 (Fundação → MVP fatia 1 → MVP fatia 2)
 **Contexto:** `docs/01-briefing-projeto.md` (§9–§10) e `docs/pesquisa-cientifica.md`
 
