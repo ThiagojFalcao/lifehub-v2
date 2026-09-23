@@ -8,11 +8,47 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
+# AGENTS.md — LifeHub V2
+
+Guia para agentes de IA que trabalharem neste repositório.
+
+## O que é
+
+LifeHub V2: habit tracker pessoal, self-hosted, dados 100% locais (SQLite).
+Base científica e decisões em `docs/01-briefing-projeto.md` e `docs/pesquisa-cientifica.md`.
+
+## Comandos
+
+- `npm run dev` — servidor de desenvolvimento (http://localhost:3000)
+- `npm run build` / `npm run start` — produção local
+- `npm test` — Vitest (unit + integração)
+- `npm run e2e` — Playwright smoke (porta 3210, banco `data/e2e.db`)
+- `npm run db:generate` / `npm run db:migrate` — migrations Drizzle
+- `npm run seed` — cria o usuário único (usa `SEED_EMAIL`/`SEED_PASSWORD`)
+- `npm run backup` — backup do banco (retenção automática)
+- `npm run check:data` — guardrail: falha se dado pessoal estiver versionado
+- `npm run lint` / `npm run typecheck` / `npm run format`
+
+## Convenções
+
+- Docs em pt-BR; código (arquivos, funções, tabelas) em inglês.
+- Conventional Commits, commits atômicos direto na `main`.
+- ADRs numeradas e imutáveis (`docs/adr/`): decisão nova = ADR nova.
+- Specs e planos em `docs/superpowers/specs/` e `docs/superpowers/plans/`.
+- **Nunca** commitar `.env`, `data/`, `backups/` ou qualquer `.db` — há guardrail na CI.
+- Processo de features: superpowers (brainstorming → spec → writing-plans → execução com TDD).
+
+## Ciclos
+
+1. **Fundação** (concluindo): repo, CI, scaffold, auth, backup, docs.
+2. **MVP fatia 1**: schema de hábitos, CRUD, registro rápido, dashboard (gráfico de linha + calendário de mês).
+3. **MVP fatia 2**: métricas quantitativas, Regra dos 2 Dias + Floor Plan, check-in emocional, histórico.
+
 ## Estado do projeto (handoff)
 
-- **Ciclo 1 (Fundação) em andamento — Tasks 1–8 de 11 concluídas.** Último commit: `a92ef95` (CI verde no GitHub Actions).
-- **Ao retomar:** leia `docs/superpowers/plans/2026-09-23-fundacao-lifehub-v2.md` (progresso no topo) e o ledger local `.superpowers/sdd/2026-09-23-fundacao-lifehub-v2/progress.md` (registro task a task: commits, testes, rulings). Próxima task: **Task 9 — Documentação final** (README, AGENTS.md, LICENSE, ADRs, runbook completo).
-- Contexto e decisões: `docs/01-briefing-projeto.md` (§9–§10) e spec em `docs/superpowers/specs/2026-09-23-fundacao-lifehub-v2-design.md`.
+- **Ciclo 1 (Fundação) em andamento — Tasks 1–9 de 11 concluídas.** Último commit: `c744ef3` (CI verde no GitHub Actions).
+- **Ao retomar:** leia `docs/superpowers/plans/2026-09-23-fundacao-lifehub-v2.md` (progresso no topo) e o ledger local `.superpowers/sdd/2026-09-23-fundacao-lifehub-v2/progress.md` (registro task a task: commits, testes, rulings). Próxima task: **Task 10 — Manifest PWA + ícone placeholder**.
+- Contexto e decisões: `docs/01-briefing-projeto.md` (§9–§10), ADRs em `docs/adr/` e spec em `docs/superpowers/specs/2026-09-23-fundacao-lifehub-v2-design.md`.
 - Processo: superpowers — `executing-plans` inline (ledger + scripts `task-start`/`task-done`); TDD obrigatório.
 - Comandos: `npm run dev`, `npm test`, `npm run e2e` (porta 3210), `npm run db:migrate`, `npm run seed`, `npm run backup`, `npm run check:data`, `npm run lint`, `npm run typecheck`, `npm run build`.
 - **Nunca** commitar `.env`, `data/`, `backups/`, `*.db` — há guardrail na CI.

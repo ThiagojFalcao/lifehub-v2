@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LifeHub
 
-## Getting Started
+[![CI](https://github.com/ThiagojFalcao/lifehub-v2/actions/workflows/ci.yml/badge.svg)](https://github.com/ThiagojFalcao/lifehub-v2/actions/workflows/ci.yml)
 
-First, run the development server:
+Habit tracker pessoal, self-hosted e com dados 100% locais — desenhado para
+construir consistência sem punição: nada de streaks rígidos, nada de "você falhou".
+
+> 🚧 Em construção — Ciclo 1 (fundação) concluído; o tracker chega nos próximos ciclos.
+
+## Visão
+
+Três camadas:
+
+1. **Ação (hoje):** registro rápido do dia (binário + métricas opcionais) e check-in emocional.
+2. **Consistência (semanas/meses):** hábitos com Regra dos 2 Dias e Floor Plan para dias difíceis.
+3. **Identidade (longo prazo):** trilha de estudos (analista de dados JR → Pleno → Sênior) com projeto prático por nível.
+
+A base científica (streaks, TDAH/RSD, gamificação White-Hat) está documentada em
+[`docs/01-briefing-projeto.md`](docs/01-briefing-projeto.md) e
+[`docs/pesquisa-cientifica.md`](docs/pesquisa-cientifica.md).
+
+## Stack
+
+Next.js (App Router) · TypeScript · Tailwind + shadcn/ui · SQLite (better-sqlite3) +
+Drizzle · Better Auth · Vitest + Playwright · GitHub Actions.
+
+## Rodando localmente
+
+Pré-requisitos: Node 22+ e npm. Passo a passo completo no
+[`docs/runbook.md`](docs/runbook.md). Resumo:
 
 ```bash
+npm ci
+Copy-Item .env.example .env   # preencha BETTER_AUTH_SECRET, SEED_EMAIL, SEED_PASSWORD
+npm run db:migrate
+npm run seed
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Estrutura
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `src/app` — rotas (grupo `(app)` protegido, `/login` público)
+- `src/db` — client, schema e schema de auth (Drizzle)
+- `src/lib` — auth, env, seed
+- `scripts` — backup, seed, guardrail, preparação de e2e
+- `docs/` — briefing, pesquisa, ADRs, runbook, specs e planos
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Decisões
 
-## Learn More
+Todas as decisões técnicas estão registradas como ADRs em [`docs/adr/`](docs/adr/).
 
-To learn more about Next.js, take a look at the following resources:
+## Roadmap
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [x] Ciclo 1 — Fundação (repo, CI, auth, backup, docs)
+- [ ] Ciclo 2 — MVP fatia 1 (schema de hábitos, CRUD, registro, dashboard)
+- [ ] Ciclo 3 — MVP fatia 2 (métricas, recuperação, check-in emocional)
+- [ ] Pós-MVP — relógio (Samsung Health), XP/níveis, árvore de habilidades
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Licença
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT — veja [`LICENSE`](LICENSE).

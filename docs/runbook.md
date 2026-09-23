@@ -2,6 +2,37 @@
 
 Operação do app no servidor local (máquina do criador, Windows).
 
+## Pré-requisitos
+
+- **Node 22+** e npm 10+ (na máquina do criador, o Node é gerenciado pelo Hermes em `C:\Users\Usuario\AppData\Local\hermes\node`).
+- **Git** e, para operar a CI, **GitHub CLI** (`gh`) autenticado.
+- Windows + PowerShell 5.1 no ambiente do criador.
+
+## Setup
+
+```powershell
+git clone https://github.com/ThiagojFalcao/lifehub-v2.git
+Set-Location lifehub-v2
+npm ci
+Copy-Item .env.example .env
+# Gere o segredo e preencha BETTER_AUTH_SECRET, SEED_EMAIL e SEED_PASSWORD no .env:
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+npm run db:migrate
+npm run seed
+npm run dev
+```
+
+Abra http://localhost:3000 → redireciona para `/login`; entre com o email/senha do seed.
+
+## Produção local
+
+```powershell
+npm run build
+npm run start
+```
+
+O app sobe em http://localhost:3000 (conforme `BETTER_AUTH_URL` no `.env`). Subida manual por decisão (ADR 0011).
+
 ## Backup
 
 - **Manual:** `npm run backup` → gera `backups/lifehub-AAAAMMDD-HHmmss.db` (`VACUUM INTO` + `PRAGMA integrity_check`) e registra em `backups/backup.log`.
@@ -12,7 +43,6 @@ schtasks /Create /TN "LifeHub Backup" /TR "cmd /c cd /d C:\Users\Usuario\Documen
 ```
 
 - **Retenção:** 30 backups diários + o primeiro de cada um dos últimos 12 meses; o resto é apagado automaticamente.
-- **Cópia externa:** sincronizar a pasta `backups/` (OneDrive/Google Drive) ou copiar para pendrive periodicamente. **Nunca** sincronizar `data/lifehub.db` ao vivo.
 
 ## Restore
 
@@ -35,3 +65,28 @@ Copy-Item $latest data\restore-test.db
 node -e "const D=require('better-sqlite3');const db=new D('data/restore-test.db',{readonly:true});console.log('integrity:', db.pragma('integrity_check',{simple:true}));console.log('users:', db.prepare('select count(*) as c from user').get().c);"
 Remove-Item data\restore-test.db
 ```
+
+## Cópia externa dos backups
+
+- Sincronizar a pasta `backups/` (OneDrive/Google Drive) ou copiar para pendrive periodicamente.
+- **Nunca** sincronizar `data/lifehub.db` ao vivo: o banco está em uso (WAL) e a cópia ao vivo pode sair inconsistente. A cópia externa é sempre da pasta `backups/`.
+
+## Acesso pelo celular (Tailscale)
+
+1. Instale o Tailscale na máquina e no celular e entre na mesma tailnet.
+2. Na máquina, exponha a porta do app via HTTPS:
+
+```powershell
+tailscale serve --bg 3000
+```
+
+3. Acesse pelo MagicDNS (ex.: `https://<maquina>.<tailnet>.ts.net`) e use "Adicionar à tela inicial" — PWA instalável exige HTTPS.
+4. **Nunca** usar `tailscale funnel` (exposição pública).
+
+## Troubleshooting
+
+- **Porta ocupada:** `npm run dev -- -p 3001` (ajuste `BETTER_AUTH_URL` se necessário).
+- **`better-sqlite3` pedindo rebuild** (após trocar de versão do Node): `npm rebuild better-sqlite3`.
+- **e2e falhando com servidor já rodando:** o e2e sobe o próprio servidor na porta **3210**; feche instâncias antigas de dev que ocupem essa porta.
+- **CI vermelha:** `gh run view --log-failed`.
+- **Clone novo:** `data/` e `backups/` não vêm do git — são criados automaticamente pelo app/scripts.
