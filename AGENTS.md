@@ -49,6 +49,7 @@ Base científica e decisões em `docs/01-briefing-projeto.md` e `docs/pesquisa-c
 
 - **Ciclo 1 (Fundação) concluído e verificado em 2026-09-23 — 11 de 11 tasks; CI verde.**
 - **Próximo:** spec do Ciclo 2 (MVP fatia 1 — schema de hábitos, CRUD, registro rápido, dashboard) via superpowers (brainstorming → spec → writing-plans → execução com TDD).
+- **Antes de expor o app** (Tailscale/Ciclo 2): trocar a senha de teste do login — a senha usada no seed ficou pública no histórico do repo (procedimento em `docs/runbook.md`).
 - Contexto e decisões: `docs/01-briefing-projeto.md` (§9–§10), ADRs em `docs/adr/`, spec do Ciclo 1 em `docs/superpowers/specs/2026-09-23-fundacao-lifehub-v2-design.md` e plano (concluído) em `docs/superpowers/plans/2026-09-23-fundacao-lifehub-v2.md`.
 - Comandos: `npm run dev`, `npm test`, `npm run e2e` (porta 3210), `npm run db:migrate`, `npm run seed`, `npm run backup`, `npm run check:data`, `npm run lint`, `npm run typecheck`, `npm run build`.
 - **Nunca** commitar `.env`, `data/`, `backups/`, `*.db` — há guardrail na CI.

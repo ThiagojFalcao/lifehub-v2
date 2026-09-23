@@ -77,6 +77,19 @@ Remove-Item data\restore-test.db
 - Sincronizar a pasta `backups/` (OneDrive/Google Drive) ou copiar para pendrive periodicamente.
 - **Nunca** sincronizar `data/lifehub.db` ao vivo: o banco está em uso (WAL) e a cópia ao vivo pode sair inconsistente. A cópia externa é sempre da pasta `backups/`.
 
+## Trocar a senha do login
+
+> A senha usada no seed até 2026-09-23 ficou exposta no histórico público do repositório — troque antes de expor o app (ex.: Tailscale no Ciclo 2).
+
+1. Edite `SEED_PASSWORD` no `.env` com a nova senha.
+2. Apague o usuário e as sessões (o seed é idempotente e **não** recria a credencial de um usuário existente):
+
+```powershell
+node -e "const D=require('better-sqlite3');const db=new D('data/lifehub.db');db.prepare('delete from session').run();db.prepare('delete from account').run();db.prepare('delete from user').run();db.close();"
+```
+
+3. Rode `npm run seed` e entre com a nova senha.
+
 ## Acesso pelo celular (Tailscale)
 
 1. Instale o Tailscale na máquina e no celular e entre na mesma tailnet.
