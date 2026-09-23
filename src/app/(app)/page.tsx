@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { getDb } from "@/db/client";
+import { ArchivedList } from "@/components/habits/archived-list";
 import { HabitFormDialog } from "@/components/habits/habit-form-dialog";
 import { HabitList } from "@/components/habits/habit-list";
 import { MonthCalendar } from "@/components/habits/month-calendar";
@@ -24,6 +25,12 @@ export default async function HomePage() {
     .filter((entry) => entry.date === today)
     .map((entry) => entry.habitId);
   const habitSummaries = activeHabits.map((habit) => ({
+    id: habit.id,
+    name: habit.name,
+    color: toHabitColor(habit.color),
+  }));
+  const archivedHabits = allHabits.filter((habit) => habit.archivedAt !== null);
+  const archivedSummaries = archivedHabits.map((habit) => ({
     id: habit.id,
     name: habit.name,
     color: toHabitColor(habit.color),
@@ -74,6 +81,7 @@ export default async function HomePage() {
           <HabitList habits={habitSummaries} date={today} doneIds={doneToday} />
         )}
       </section>
+      <ArchivedList habits={archivedSummaries} />
     </div>
   );
 }

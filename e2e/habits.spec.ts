@@ -68,3 +68,43 @@ test("registra ontem pelo painel do dia no calendário", async ({ page }) => {
   await page.reload();
   await expect(page.locator(`[data-date="${yesterdayString}"]`)).toHaveAttribute("data-level", "3");
 });
+
+test("detalhe: backfill, editar, arquivar e reativar", async ({ page }) => {
+  const today = new Date();
+  test.skip(today.getDate() <= 2, "início do mês: sem dias anteriores suficientes no calendário");
+
+  const twoDaysAgo = new Date(today);
+  twoDaysAgo.setDate(today.getDate() - 2);
+  const pad = (value: number) => String(value).padStart(2, "0");
+  const twoDaysAgoString = `${twoDaysAgo.getFullYear()}-${pad(twoDaysAgo.getMonth() + 1)}-${pad(twoDaysAgo.getDate())}`;
+
+  backdateHabitCreatedAt("Exercício", twoDaysAgo);
+  await login(page);
+  await page.getByRole("link", { name: "Exercício" }).click();
+  await expect(page.getByRole("heading", { name: "Exercício" })).toBeVisible();
+
+  // backfill de dois dias atrás direto no calendário do hábito
+  await page.locator(`[data-date="${twoDaysAgoString}"]`).click();
+  await expect(page.locator(`[data-date="${twoDaysAgoString}"]`)).toHaveAttribute(
+    "data-done",
+    "true",
+  );
+
+  await page.getByRole("button", { name: "Editar" }).click();
+  await page.getByLabel("Nome").fill("Exercício físico");
+  await page.getByRole("button", { name: "Salvar" }).click();
+  await expect(page.getByRole("heading", { name: "Exercício físico" })).toBeVisible();
+
+  await page.getByRole("button", { name: "Arquivar" }).click();
+  await page.getByRole("button", { name: "Arquivar mesmo assim" }).click();
+  await expect(page.getByRole("button", { name: "Reativar" })).toBeVisible();
+
+  await page.getByRole("link", { name: "LifeHub" }).click();
+  await expect(page.getByText("Arquivados (1)")).toBeVisible();
+  await page.getByRole("button", { name: "Arquivados (1)" }).click();
+  await page.getByRole("link", { name: "Exercício físico" }).click();
+  await page.getByRole("button", { name: "Reativar" }).click();
+  await page.getByRole("link", { name: "LifeHub" }).click();
+  await expect(page.getByText("Arquivados (1)")).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "Exercício físico" })).toBeVisible();
+});
