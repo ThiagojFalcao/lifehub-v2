@@ -36,6 +36,7 @@ Base científica e decisões em `docs/01-briefing-projeto.md` e `docs/pesquisa-c
 - ADRs numeradas e imutáveis (`docs/adr/`): decisão nova = ADR nova.
 - Specs e planos em `docs/superpowers/specs/` e `docs/superpowers/plans/`.
 - **Nunca** commitar `.env`, `data/`, `backups/` ou qualquer `.db` — há guardrail na CI.
+- Instalação npm sem lifecycle scripts (`.npmrc`, ADR 0016) — better-sqlite3 usa prebuilds do pacote; se um pacote precisar, `npm_config_ignore_scripts=false npm rebuild <pacote>`.
 - Processo de features: superpowers (brainstorming → spec → writing-plans → execução com TDD).
 
 ## Ciclos

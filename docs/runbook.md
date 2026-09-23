@@ -24,6 +24,12 @@ npm run dev
 
 Abra http://localhost:3000 → redireciona para `/login`; entre com o email/senha do seed.
 
+Para rodar os testes e2e, instale o Chromium uma vez (o `npm ci` não baixa browsers — ver ADR 0016):
+
+```powershell
+npx playwright install chromium
+```
+
 ## Produção local
 
 ```powershell
@@ -85,6 +91,7 @@ tailscale serve --bg 3000
 
 ## Troubleshooting
 
+- **Instalação de dependências:** o projeto usa `ignore-scripts=true` no `.npmrc` (ADR 0016) — o better-sqlite3 usa os binários pré-compilados do pacote e o `npm ci` não exige toolchain C++. Se um pacote futuro precisar do script de instalação, rode `npm_config_ignore_scripts=false npm rebuild <pacote>`.
 - **Porta ocupada:** `npm run dev -- -p 3001` (ajuste `BETTER_AUTH_URL` se necessário).
 - **`better-sqlite3` pedindo rebuild** (após trocar de versão do Node): `npm rebuild better-sqlite3`.
 - **e2e falhando com servidor já rodando:** o e2e sobe o próprio servidor na porta **3210**; feche instâncias antigas de dev que ocupem essa porta.
