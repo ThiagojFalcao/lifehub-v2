@@ -71,7 +71,7 @@ lifehub-v2/
 
 | Item | Decisão |
 |------|---------|
-| Runtime | Node 24 LTS (fallback 22 se algum nativo reclamar), npm |
+| Runtime | Node 22 LTS (gerenciado pelo Hermes na máquina do criador; upgrade para 24 adiado — ver §9), npm |
 | Framework | Next.js (última estável no momento do scaffold), App Router, TS strict, alias `@/` |
 | UI | Tailwind + shadcn/ui |
 | Banco | SQLite via better-sqlite3 + Drizzle ORM; WAL; migrations drizzle-kit |
@@ -98,7 +98,7 @@ Notas:
 
 ## 6. CI
 
-- Workflow `.github/workflows/ci.yml` em push/PR: `npm ci` → `lint` → `typecheck` → `test` → `build` (ubuntu-latest, Node 24).
+- Workflow `.github/workflows/ci.yml` em push/PR: `npm ci` → `lint` → `typecheck` → `test` → `build` (ubuntu-latest, Node 22).
 - Guardrail: falha se arquivos `.db`, `.env` ou conteúdo de `data/`/`backups/` estiverem versionados.
 - Badge no README.
 
@@ -126,7 +126,8 @@ Notas:
 
 | Risco | Mitigação |
 |-------|-----------|
-| better-sqlite3 × Windows/Node 24 | Prebuilds oficiais; se falhar, fallback Node 22 |
+| Node 22 (Hermes) — upgrade para 24 adiado | Não instalar outro Node por fora (conflito de PATH com o Hermes); CI alinhada no 22; revisitar quando o Hermes atualizar |
+| better-sqlite3 × Windows | Prebuilds oficiais; rebuild local se necessário |
 | Better Auth × Next.js (compatibilidade de versões) | Verificar no scaffold e travar versões no lockfile |
 | Task Scheduler (permissões/agendamento) | Runbook com comando exato + alternativa manual |
 | Escopo creep | Lista YAGNI explícita + ciclos com spec própria |

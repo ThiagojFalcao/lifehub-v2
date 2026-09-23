@@ -232,7 +232,7 @@ Principais referências:
 - Gráfico de evolução do hábito: Recharts
 - Componentes: shadcn/ui
 - Repositório Git desde o dia 1
-- Node 24 LTS (fallback para 22 se algum módulo nativo reclamar)
+- Node 22 LTS (gerenciado pelo Hermes na máquina do criador; upgrade para 24 adiado para evitar conflito de PATH — CI alinhada no 22)
 
 ### Processo de desenvolvimento
 
