@@ -47,9 +47,8 @@ Base científica e decisões em `docs/01-briefing-projeto.md` e `docs/pesquisa-c
 
 ## Estado do projeto (handoff)
 
-- **Ciclo 1 (Fundação) em andamento — Tasks 1–9 de 11 concluídas.** Último commit: `c744ef3` (CI verde no GitHub Actions).
-- **Ao retomar:** leia `docs/superpowers/plans/2026-09-23-fundacao-lifehub-v2.md` (progresso no topo) e o ledger local `.superpowers/sdd/2026-09-23-fundacao-lifehub-v2/progress.md` (registro task a task: commits, testes, rulings). Próxima task: **Task 10 — Manifest PWA + ícone placeholder**.
-- Contexto e decisões: `docs/01-briefing-projeto.md` (§9–§10), ADRs em `docs/adr/` e spec em `docs/superpowers/specs/2026-09-23-fundacao-lifehub-v2-design.md`.
-- Processo: superpowers — `executing-plans` inline (ledger + scripts `task-start`/`task-done`); TDD obrigatório.
+- **Ciclo 1 (Fundação) concluído e verificado em 2026-09-23 — 11 de 11 tasks; CI verde.**
+- **Próximo:** spec do Ciclo 2 (MVP fatia 1 — schema de hábitos, CRUD, registro rápido, dashboard) via superpowers (brainstorming → spec → writing-plans → execução com TDD).
+- Contexto e decisões: `docs/01-briefing-projeto.md` (§9–§10), ADRs em `docs/adr/`, spec do Ciclo 1 em `docs/superpowers/specs/2026-09-23-fundacao-lifehub-v2-design.md` e plano (concluído) em `docs/superpowers/plans/2026-09-23-fundacao-lifehub-v2.md`.
 - Comandos: `npm run dev`, `npm test`, `npm run e2e` (porta 3210), `npm run db:migrate`, `npm run seed`, `npm run backup`, `npm run check:data`, `npm run lint`, `npm run typecheck`, `npm run build`.
 - **Nunca** commitar `.env`, `data/`, `backups/`, `*.db` — há guardrail na CI.

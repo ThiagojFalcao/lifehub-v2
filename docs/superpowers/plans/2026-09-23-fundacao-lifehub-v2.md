@@ -10,7 +10,7 @@
 
 **Spec:** `docs/superpowers/specs/2026-09-23-fundacao-lifehub-v2-design.md`
 
-**Progresso (2026-09-23):** Tasks 1–8 concluídas (commits `039115e..a92ef95`; CI verde). Próxima: **Task 9 — Documentação final**. Ledger local: `.superpowers/sdd/2026-09-23-fundacao-lifehub-v2/progress.md`.
+**Progresso (2026-09-23):** Ciclo 1 concluído — Tasks 1–11 de 11 (CI verde; auditoria final com clone limpo verificado). Próximo passo: spec do Ciclo 2 (MVP fatia 1).
 
 ## Global Constraints
 

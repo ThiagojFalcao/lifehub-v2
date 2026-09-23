@@ -270,9 +270,9 @@ Principais referências:
 
 ---
 
-**Última atualização:** 2026-09-23 (sessão 2)
-**Status:** Ciclo 1 (Fundação) em implementação — Tasks 1–8 de 11 concluídas (repo público + CI verde + Better Auth + login/e2e + backup agendado com restore testado).
-**Próximo passo:** Retomar a **Task 9 (docs finais)** e seguir até a Task 11 (auditoria). Antes de continuar, leia:
-- Plano (progresso no topo): `docs/superpowers/plans/2026-09-23-fundacao-lifehub-v2.md`
-- Ledger local (registro task a task: commits, testes, rulings): `.superpowers/sdd/2026-09-23-fundacao-lifehub-v2/progress.md`
-- Último commit: `a92ef95` (CI verde no GitHub Actions)
+**Última atualização:** 2026-09-23 (sessão 3)
+**Status:** Ciclo 1 (Fundação) concluído e verificado — 11 de 11 tasks (repo público + CI verde + Better Auth + login/e2e + backup agendado com restore testado + docs/ADRs + manifest PWA).
+**Próximo passo:** Ciclo 2 (MVP fatia 1) — começar pelo brainstorming da spec (schema de hábitos, CRUD, registro rápido, dashboard). Referências:
+- Plano do Ciclo 1 (concluído): `docs/superpowers/plans/2026-09-23-fundacao-lifehub-v2.md`
+- Spec do Ciclo 1 (verificada): `docs/superpowers/specs/2026-09-23-fundacao-lifehub-v2-design.md`
+- Decisões: `docs/adr/`

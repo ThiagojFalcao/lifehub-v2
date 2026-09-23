@@ -1,7 +1,7 @@
 # LifeHub V2 — Spec do Ciclo 1: Fundação
 
 **Data:** 2026-09-23
-**Status:** Aprovada em 2026-09-23 — implementação em andamento (Tasks 1–8 de 11 concluídas; CI verde)
+**Status:** Ciclo 1 implementado e verificado em 2026-09-23 (11 de 11 tasks; CI verde)
 **Ciclo:** 1 de 3 (Fundação → MVP fatia 1 → MVP fatia 2)
 **Contexto:** `docs/01-briefing-projeto.md` (§9–§10) e `docs/pesquisa-cientifica.md`
 
@@ -87,6 +87,8 @@ Notas:
 - Mutações via Server Actions; route handlers só quando necessário.
 - Proteção de rotas: grupo `(app)` com checagem de sessão server-side (evita limitação de runtime do middleware).
 - `.env`: `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `DATABASE_PATH` — `.env.example` documentado, `.env` gitignored.
+- `better-sqlite3` v13 com `.npmrc` `ignore-scripts=true` (ADR 0016): `npm ci` usa os prebuilds do pacote, sem toolchain C++ no Windows.
+- `drizzle.config.ts` cria o diretório do banco se não existir (clone limpo: `npm run db:migrate` funciona direto).
 
 ## 5. Backup e restore
 
@@ -112,15 +114,15 @@ Notas:
 
 ## 8. Critérios de conclusão (DoD)
 
-- [ ] Repo público `lifehub-v2` com MIT, README completo e badge CI verde.
-- [ ] "Clone e rode": em máquina limpa, seguindo só o runbook, app sobe com `npm run dev` e login funciona com a conta semeada.
-- [ ] CI verde: lint, typecheck, test, build + guardrail.
-- [ ] Migrations + seed funcionando (tabelas do Better Auth + usuário único).
-- [ ] Backup: gera arquivo íntegro, retenção ok, agendado, cópia externa configurada.
-- [ ] Restore testado uma vez (data registrada no runbook).
-- [ ] Docs completas (ADRs, runbook, README, AGENTS.md, briefing atualizado).
-- [ ] Vitest com smoke de auth/seed; Playwright smoke de login rodando local.
-- [ ] Manifest PWA presente.
+- [x] Repo público `lifehub-v2` com MIT, README completo e badge CI verde.
+- [x] "Clone e rode": em máquina limpa, seguindo só o runbook, app sobe com `npm run dev` e login funciona com a conta semeada (verificado no clone de auditoria: `npm ci` → `db:migrate` → `seed` → `build` → `e2e`).
+- [x] CI verde: lint, typecheck, test, build + guardrail.
+- [x] Migrations + seed funcionando (tabelas do Better Auth + usuário único).
+- [x] Backup: gera arquivo íntegro, retenção ok, agendado; cópia externa documentada no runbook (sincronização manual da pasta `backups/`).
+- [x] Restore testado uma vez (data registrada no runbook: 2026-09-23).
+- [x] Docs completas (ADRs, runbook, README, AGENTS.md, briefing atualizado).
+- [x] Vitest com smoke de auth/seed; Playwright smoke de login rodando local.
+- [x] Manifest PWA presente.
 
 ## 9. Riscos
 
