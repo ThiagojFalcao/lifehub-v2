@@ -25,6 +25,7 @@ Base científica e decisões em `docs/01-briefing-projeto.md` e `docs/pesquisa-c
 - `npm run e2e` — Playwright smoke (porta 3210, banco `data/e2e.db`)
 - `npm run db:generate` / `npm run db:migrate` — migrations Drizzle
 - `npm run seed` — cria o usuário único (usa `SEED_EMAIL`/`SEED_PASSWORD`)
+- `npm run seed:demo` — popula hábitos e registros de demonstração (exige o usuário do `npm run seed`)
 - `npm run backup` — backup do banco (retenção automática)
 - `npm run check:data` — guardrail: falha se dado pessoal estiver versionado
 - `npm run lint` / `npm run typecheck` / `npm run format`
@@ -47,9 +48,9 @@ Base científica e decisões em `docs/01-briefing-projeto.md` e `docs/pesquisa-c
 
 ## Estado do projeto (handoff)
 
-- **Ciclo 1 (Fundação) concluído e verificado em 2026-09-23 — 11 de 11 tasks; CI verde.**
-- **Próximo:** spec do Ciclo 2 (MVP fatia 1 — schema de hábitos, CRUD, registro rápido, dashboard) via superpowers (brainstorming → spec → writing-plans → execução com TDD).
-- **Antes de expor o app** (Tailscale/Ciclo 2): trocar a senha de teste do login — a senha usada no seed ficou pública no histórico do repo (procedimento em `docs/runbook.md`).
-- Contexto e decisões: `docs/01-briefing-projeto.md` (§9–§10), ADRs em `docs/adr/`, spec do Ciclo 1 em `docs/superpowers/specs/2026-09-23-fundacao-lifehub-v2-design.md` e plano (concluído) em `docs/superpowers/plans/2026-09-23-fundacao-lifehub-v2.md`.
-- Comandos: `npm run dev`, `npm test`, `npm run e2e` (porta 3210), `npm run db:migrate`, `npm run seed`, `npm run backup`, `npm run check:data`, `npm run lint`, `npm run typecheck`, `npm run build`.
+- **Ciclo 2 (MVP fatia 1) concluído e verificado em 2026-09-23 — 12 de 12 tasks; CI verde.**
+- **Próximo:** spec do Ciclo 3 (fatia 2 — métricas quantitativas, Regra dos 2 Dias + Floor Plan, check-in emocional, histórico) via superpowers (brainstorming → spec → writing-plans → execução com TDD).
+- **Antes de expor o app** (Tailscale): trocar a senha de teste do login — a senha usada no seed ficou pública no histórico do repo (procedimento em `docs/runbook.md`).
+- Contexto e decisões: `docs/01-briefing-projeto.md` (§9–§10), ADRs em `docs/adr/`, spec do Ciclo 2 em `docs/superpowers/specs/2026-09-23-mvp-fatia-1-design.md` e plano (concluído) em `docs/superpowers/plans/2026-09-23-mvp-fatia-1.md`.
+- Comandos: `npm run dev`, `npm test`, `npm run e2e` (porta 3210), `npm run db:migrate`, `npm run seed`, `npm run seed:demo`, `npm run backup`, `npm run check:data`, `npm run lint`, `npm run typecheck`, `npm run build`.
 - **Nunca** commitar `.env`, `data/`, `backups/`, `*.db` — há guardrail na CI.

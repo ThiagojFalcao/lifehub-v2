@@ -5,7 +5,7 @@
 Habit tracker pessoal, self-hosted e com dados 100% locais — desenhado para
 construir consistência sem punição: nada de streaks rígidos, nada de "você falhou".
 
-> 🚧 Em construção — Ciclo 1 (fundação) concluído; o tracker chega nos próximos ciclos.
+> 🚧 Em construção — Ciclos 1–2 concluídos: o tracker já registra hábitos (dashboard com gráfico e calendário); métricas, recuperação e check-in emocional chegam no Ciclo 3.
 
 ## Visão
 
@@ -52,7 +52,7 @@ Todas as decisões técnicas estão registradas como ADRs em [`docs/adr/`](docs/
 ## Roadmap
 
 - [x] Ciclo 1 — Fundação (repo, CI, auth, backup, docs)
-- [ ] Ciclo 2 — MVP fatia 1 (schema de hábitos, CRUD, registro, dashboard)
+- [x] Ciclo 2 — MVP fatia 1 (schema de hábitos, CRUD, registro, dashboard)
 - [ ] Ciclo 3 — MVP fatia 2 (métricas, recuperação, check-in emocional)
 - [ ] Pós-MVP — relógio (Samsung Health), XP/níveis, árvore de habilidades
 

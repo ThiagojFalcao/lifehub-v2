@@ -22,6 +22,8 @@ npm run seed
 npm run dev
 ```
 
+Opcional (dados de demonstração): rode `npm run seed:demo` para popular hábitos e registros de exemplo — exige o usuário criado por `npm run seed`.
+
 Abra http://localhost:3000 → redireciona para `/login`; entre com o email/senha do seed.
 
 Para rodar os testes e2e, instale o Chromium uma vez (o `npm ci` não baixa browsers — ver ADR 0016):
