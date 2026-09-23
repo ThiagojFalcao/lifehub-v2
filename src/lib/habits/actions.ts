@@ -12,7 +12,11 @@ async function withSession(
 ): Promise<ActionResult> {
   const session = await getSessionOrNull();
   if (!session) return { ok: false, error: "Sessão expirada. Entre novamente." };
-  return handler(session.user.id);
+  try {
+    return await handler(session.user.id);
+  } catch {
+    return { ok: false, error: "Algo deu errado. Tente de novo." };
+  }
 }
 
 export async function createHabit(input: unknown): Promise<ActionResult> {
