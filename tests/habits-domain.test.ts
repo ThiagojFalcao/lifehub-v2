@@ -64,7 +64,7 @@ describe("buildMonthOverview", () => {
       { habitId: "h2", date: "2026-09-06" }, // fora do período (arquivado em 05)
     ];
 
-    const overview = buildMonthOverview([active, archived], entries, "2026-09", "2026-09-10");
+    const overview = buildMonthOverview([active, archived], entries, "2026-09");
     const byDate = new Map(overview.map((day) => [day.date, day]));
 
     expect(byDate.get("2026-09-01")).toMatchObject({ active: 2, done: 0 });

@@ -61,7 +61,6 @@ export function buildMonthOverview(
   habits: HabitLike[],
   entries: EntryLike[],
   month: string,
-  today: string,
 ): DayOverview[] {
   return monthDates(month).map((date) => buildDayOverview(habits, entries, date));
 }
