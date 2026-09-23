@@ -81,7 +81,7 @@ Remove-Item data\restore-test.db
 
 ## Trocar a senha do login
 
-> A senha usada no seed até 2026-09-23 ficou exposta no histórico público do repositório — troque antes de expor o app (ex.: Tailscale no Ciclo 2).
+> A senha usada no seed até 2026-09-23 ficou exposta no histórico público do repositório — troque antes de expor o app (ex.: Tailscale).
 
 1. Edite `SEED_PASSWORD` no `.env` com a nova senha.
 2. Apague o usuário e as sessões (o seed é idempotente e **não** recria a credencial de um usuário existente):

@@ -1,7 +1,7 @@
 # LifeHub V2 — Spec do Ciclo 2: MVP fatia 1 (habit tracker)
 
 **Data:** 2026-09-23
-**Status:** Aprovada em 2026-09-23 — pronta para plano de implementação
+**Status:** Ciclo 2 implementado e verificado em 2026-09-23 — Tasks 1–13 de 13; CI verde
 **Ciclo:** 2 de 3 (Fundação → MVP fatia 1 → MVP fatia 2)
 **Contexto:** `docs/01-briefing-projeto.md` (§3–§5, §9–§10), `docs/pesquisa-cientifica.md`, ADRs (`docs/adr/`) e spec do Ciclo 1 (`docs/superpowers/specs/2026-09-23-fundacao-lifehub-v2-design.md`)
 **Depende de:** Ciclo 1 concluído e verificado (11/11 tasks; CI verde; `main` em `cfd4e4c`)
@@ -145,16 +145,16 @@ Todas escopadas por `userId`; retornam linhas cruas e o cálculo (grade do mês,
 
 ## 8. Critérios de conclusão (DoD)
 
-- [ ] Schema + migration versionada; `npm run db:migrate` aplica limpo em clone.
-- [ ] CRUD completo (criar/editar/arquivar/reativar) na UI e coberto por testes.
-- [ ] Registro rápido de 1 toque com atualização otimista e reversão em erro.
-- [ ] Backfill limitado (criação → hoje), na home e no detalhe, com defesa na action.
-- [ ] Home com gráfico da semana, calendário de intensidade, painel do dia, lista e arquivados.
-- [ ] Detalhe com calendário, estatísticas, editar/arquivar/reativar.
-- [ ] `npm run seed:demo` idempotente.
-- [ ] Actions protegidas por sessão (teste prova a rejeição sem sessão).
-- [ ] CI verde (lint/format/typecheck/test/build/guardrail) e e2e local verde.
-- [ ] ADRs 0017/0018 escritas; docs atualizados; DoD desta spec marcado.
+- [x] Schema + migration versionada; `npm run db:migrate` aplica limpo em clone.
+- [x] CRUD completo (criar/editar/arquivar/reativar) na UI e coberto por testes.
+- [x] Registro rápido de 1 toque com atualização otimista e reversão em erro.
+- [x] Backfill limitado (criação → hoje), na home e no detalhe, com defesa na action.
+- [x] Home com gráfico da semana, calendário de intensidade, painel do dia, lista e arquivados.
+- [x] Detalhe com calendário, estatísticas, editar/arquivar/reativar.
+- [x] `npm run seed:demo` idempotente.
+- [x] Actions protegidas por sessão (teste prova a rejeição sem sessão).
+- [x] CI verde (lint/format/typecheck/test/build/guardrail) e e2e local verde.
+- [x] ADRs 0017/0018 escritas; docs atualizados; DoD desta spec marcado.
 
 ## 9. ADRs novas
 
