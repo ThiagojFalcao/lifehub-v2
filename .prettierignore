@@ -6,3 +6,4 @@ drizzle
 data
 backups
 package-lock.json
+src/db/auth-schema.ts

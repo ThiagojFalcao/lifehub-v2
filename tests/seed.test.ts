@@ -36,5 +36,7 @@ it("cria o usuário e a credencial uma única vez (idempotente)", async () => {
 
   const credential = db.select().from(account).where(eq(account.userId, users[0].id)).get();
   expect(credential?.providerId).toBe("credential");
-  expect(await verifyPassword({ password: input.password, hash: credential!.password! })).toBe(true);
+  expect(await verifyPassword({ password: input.password, hash: credential!.password! })).toBe(
+    true,
+  );
 });
