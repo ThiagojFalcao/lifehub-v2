@@ -2,8 +2,10 @@ import { redirect } from "next/navigation";
 import { getDb } from "@/db/client";
 import { HabitFormDialog } from "@/components/habits/habit-form-dialog";
 import { HabitList } from "@/components/habits/habit-list";
+import { WeekChart } from "@/components/habits/week-chart";
 import { toHabitColor } from "@/lib/habits/colors";
-import { endOfMonth, startOfMonth, todayDateString } from "@/lib/habits/dates";
+import { endOfMonth, startOfMonth, startOfWeek, todayDateString } from "@/lib/habits/dates";
+import { buildWeekSeries } from "@/lib/habits/domain";
 import { listEntriesBetween, listHabits } from "@/lib/habits/queries";
 import { getSessionOrNull } from "@/lib/session";
 
@@ -25,9 +27,12 @@ export default async function HomePage() {
     name: habit.name,
     color: toHabitColor(habit.color),
   }));
+  const weekEntries = listEntriesBetween(db, userId, startOfWeek(today), today);
+  const weekSeries = buildWeekSeries(allHabits, weekEntries, today);
 
   return (
     <div className="space-y-6">
+      <WeekChart series={weekSeries} />
       <section className="space-y-3">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold">Hábitos</h2>
