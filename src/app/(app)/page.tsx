@@ -1,29 +1,47 @@
-"use client";
+import { redirect } from "next/navigation";
+import { getDb } from "@/db/client";
+import { HabitFormDialog } from "@/components/habits/habit-form-dialog";
+import { HabitList } from "@/components/habits/habit-list";
+import { toHabitColor } from "@/lib/habits/colors";
+import { endOfMonth, startOfMonth, todayDateString } from "@/lib/habits/dates";
+import { listEntriesBetween, listHabits } from "@/lib/habits/queries";
+import { getSessionOrNull } from "@/lib/session";
 
-import { useRouter } from "next/navigation";
-import { authClient } from "@/lib/auth-client";
+export default async function HomePage() {
+  const session = await getSessionOrNull();
+  if (!session) redirect("/login");
 
-export default function DashboardPage() {
-  const router = useRouter();
+  const { db } = getDb();
+  const userId = session.user.id;
+  const today = todayDateString();
+  const allHabits = listHabits(db, userId, { includeArchived: true });
+  const activeHabits = allHabits.filter((habit) => habit.archivedAt === null);
+  const monthEntries = listEntriesBetween(db, userId, startOfMonth(today), endOfMonth(today));
+  const doneToday = monthEntries
+    .filter((entry) => entry.date === today)
+    .map((entry) => entry.habitId);
+  const habitSummaries = activeHabits.map((habit) => ({
+    id: habit.id,
+    name: habit.name,
+    color: toHabitColor(habit.color),
+  }));
 
   return (
-    <main className="p-6">
-      <h1 className="text-2xl font-semibold">LifeHub</h1>
-      <p className="mt-2 text-sm text-neutral-500">
-        Fundação pronta. O habit tracker chega no Ciclo 2.
-      </p>
-      <button
-        type="button"
-        className="mt-4 rounded border px-3 py-2"
-        onClick={() =>
-          authClient.signOut().then(() => {
-            router.push("/login");
-            router.refresh();
-          })
-        }
-      >
-        Sair
-      </button>
-    </main>
+    <div className="space-y-6">
+      <section className="space-y-3">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold">Hábitos</h2>
+          <HabitFormDialog />
+        </div>
+        {activeHabits.length === 0 ? (
+          <div className="rounded border border-dashed p-6 text-center text-sm text-neutral-500">
+            <p className="font-medium text-neutral-700">Nenhum hábito ainda</p>
+            <p className="mt-1">Comece pequeno: um hábito, um dia de cada vez.</p>
+          </div>
+        ) : (
+          <HabitList habits={habitSummaries} date={today} doneIds={doneToday} />
+        )}
+      </section>
+    </div>
   );
 }
