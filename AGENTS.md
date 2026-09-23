@@ -42,9 +42,9 @@ Base científica e decisões em `docs/01-briefing-projeto.md` e `docs/pesquisa-c
 
 ## Ciclos
 
-1. **Fundação** (concluindo): repo, CI, scaffold, auth, backup, docs.
-2. **MVP fatia 1**: schema de hábitos, CRUD, registro rápido, dashboard (gráfico de linha + calendário de mês).
-3. **MVP fatia 2**: métricas quantitativas, Regra dos 2 Dias + Floor Plan, check-in emocional, histórico.
+1. **Fundação** (concluída): repo, CI, scaffold, auth, backup, docs.
+2. **MVP fatia 1** (concluída): schema de hábitos, CRUD, registro rápido, dashboard (gráfico de linha + calendário de mês).
+3. **MVP fatia 2** (próxima): métricas quantitativas, Regra dos 2 Dias + Floor Plan, check-in emocional, histórico.
 
 ## Estado do projeto (handoff)
 
