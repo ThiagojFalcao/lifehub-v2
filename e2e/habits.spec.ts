@@ -109,6 +109,7 @@ test("detalhe: backfill, editar, arquivar e reativar", async ({ page }) => {
 
   await page.getByRole("link", { name: "LifeHub" }).click();
   await expect(page.getByText("Arquivados (1)")).toBeVisible();
+  await expect(page.getByText("Todos os hábitos estão arquivados.")).toBeVisible();
   await page.getByRole("button", { name: "Arquivados (1)" }).click();
   await page.getByRole("link", { name: "Exercício físico" }).click();
   await page.getByRole("button", { name: "Reativar" }).click();

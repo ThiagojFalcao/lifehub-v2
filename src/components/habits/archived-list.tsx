@@ -11,6 +11,16 @@ type ArchivedListProps = {
 
 export function ArchivedList({ habits }: ArchivedListProps) {
   const [open, setOpen] = useState(false);
+  const [pendingId, setPendingId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleReactivate(id: string) {
+    setPendingId(id);
+    setError(null);
+    const result = await setArchived(id, false);
+    setPendingId(null);
+    if (!result.ok) setError(result.error);
+  }
 
   if (habits.length === 0) return null;
 
@@ -38,8 +48,9 @@ export function ArchivedList({ habits }: ArchivedListProps) {
               </Link>
               <button
                 type="button"
-                className="rounded border px-3 py-1.5 text-sm"
-                onClick={() => setArchived(habit.id, false)}
+                className="rounded border px-3 py-1.5 text-sm disabled:opacity-50"
+                disabled={pendingId === habit.id}
+                onClick={() => handleReactivate(habit.id)}
               >
                 Reativar
               </button>
@@ -47,6 +58,7 @@ export function ArchivedList({ habits }: ArchivedListProps) {
           ))}
         </ul>
       ) : null}
+      {error ? <p className="mt-2 text-sm text-red-600">{error}</p> : null}
     </section>
   );
 }

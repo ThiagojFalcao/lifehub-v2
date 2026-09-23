@@ -36,6 +36,11 @@ export function HabitFormDialog({ habit }: { habit?: HabitFormValue }) {
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
+  function handleOpenChange(next: boolean) {
+    setOpen(next);
+    setError(null);
+  }
+
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     setSaving(true);
@@ -58,7 +63,7 @@ export function HabitFormDialog({ habit }: { habit?: HabitFormValue }) {
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger render={<Button variant={editing ? "outline" : "default"} />}>
         {editing ? "Editar" : "Adicionar hábito"}
       </DialogTrigger>

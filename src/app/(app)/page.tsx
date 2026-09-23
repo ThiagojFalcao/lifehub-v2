@@ -73,10 +73,17 @@ export default async function HomePage() {
           <HabitFormDialog />
         </div>
         {activeHabits.length === 0 ? (
-          <div className="rounded border border-dashed p-6 text-center text-sm text-neutral-500">
-            <p className="font-medium text-neutral-700">Nenhum hábito ainda</p>
-            <p className="mt-1">Comece pequeno: um hábito, um dia de cada vez.</p>
-          </div>
+          archivedHabits.length > 0 ? (
+            <div className="rounded border border-dashed p-6 text-center text-sm text-neutral-500">
+              <p className="font-medium text-neutral-700">Todos os hábitos estão arquivados.</p>
+              <p className="mt-1">Reative um hábito para voltar a registrar.</p>
+            </div>
+          ) : (
+            <div className="rounded border border-dashed p-6 text-center text-sm text-neutral-500">
+              <p className="font-medium text-neutral-700">Nenhum hábito ainda</p>
+              <p className="mt-1">Comece pequeno: um hábito, um dia de cada vez.</p>
+            </div>
+          )
         ) : (
           <HabitList habits={habitSummaries} date={today} doneIds={doneToday} />
         )}
