@@ -14,6 +14,21 @@ type WeekChartProps = {
   series: { date: string; active: number; done: number }[];
 };
 
+type ChartTooltipProps = {
+  active?: boolean;
+  payload?: readonly { payload?: { done: number; active: number } }[];
+};
+
+function ChartTooltip({ active, payload }: ChartTooltipProps) {
+  const day = payload?.[0]?.payload;
+  if (!active || !day) return null;
+  return (
+    <div className="rounded border bg-white px-2 py-1 text-xs shadow">
+      {day.done} de {day.active} hábitos
+    </div>
+  );
+}
+
 const WEEKDAY_LABELS = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
 
 function weekdayLabel(date: string): string {
@@ -34,7 +49,7 @@ export function WeekChart({ series }: WeekChartProps) {
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
             <XAxis dataKey="label" tickLine={false} axisLine={false} />
             <YAxis allowDecimals={false} tickLine={false} axisLine={false} width={40} />
-            <Tooltip />
+            <Tooltip content={<ChartTooltip />} />
             <Line
               name="Concluídos"
               type="monotone"

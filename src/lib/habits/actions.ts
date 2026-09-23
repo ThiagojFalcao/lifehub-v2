@@ -10,9 +10,9 @@ import type { ActionResult } from "./service";
 async function withSession(
   handler: (userId: string) => ActionResult | Promise<ActionResult>,
 ): Promise<ActionResult> {
-  const session = await getSessionOrNull();
-  if (!session) return { ok: false, error: "Sessão expirada. Entre novamente." };
   try {
+    const session = await getSessionOrNull();
+    if (!session) return { ok: false, error: "Sessão expirada. Entre novamente." };
     return await handler(session.user.id);
   } catch {
     return { ok: false, error: "Algo deu errado. Tente de novo." };

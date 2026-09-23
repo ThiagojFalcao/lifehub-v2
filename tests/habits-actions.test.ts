@@ -52,6 +52,15 @@ describe("Server Actions", () => {
     );
   });
 
+  it("captura rejeição inesperada da sessão", async () => {
+    vi.mocked(getSessionOrNull).mockRejectedValue(new Error("boom"));
+
+    await expect(createHabit({ name: "Exercício", color: "green" })).resolves.toEqual({
+      ok: false,
+      error: "Algo deu errado. Tente de novo.",
+    });
+  });
+
   it("captura erro inesperado do serviço", async () => {
     vi.mocked(getSessionOrNull).mockResolvedValue(session as never);
     vi.mocked(service.createHabit).mockImplementationOnce(() => {

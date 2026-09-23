@@ -48,6 +48,14 @@ test("gráfico da semana mostra o resumo de hoje", async ({ page }) => {
   await expect(page.getByText(/Hoje: \d+ de \d+ hábitos/)).toBeVisible();
 });
 
+test("tooltip do gráfico mostra X de Y hábitos", async ({ page }) => {
+  await login(page);
+  const chart = page.getByLabel("Hábitos concluídos por dia nesta semana");
+  await expect(chart).toBeVisible();
+  await chart.locator(".recharts-wrapper").hover();
+  await expect(page.locator(".recharts-tooltip-wrapper")).toContainText(/de \d+ hábitos/);
+});
+
 test("registra ontem pelo painel do dia no calendário", async ({ page }) => {
   const today = new Date();
   test.skip(today.getDate() === 1, "primeiro dia do mês: não há dia anterior no calendário");
