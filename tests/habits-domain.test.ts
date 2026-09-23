@@ -43,10 +43,7 @@ describe("eligibleDates", () => {
 
   it("termina no dia anterior ao arquivamento", () => {
     const archived = habit({ archivedAt: new Date(2026, 8, 3, 8, 0) });
-    expect(eligibleDates(archived, "2026-09-10")).toEqual([
-      "2026-09-01",
-      "2026-09-02",
-    ]);
+    expect(eligibleDates(archived, "2026-09-10")).toEqual(["2026-09-01", "2026-09-02"]);
   });
 });
 
@@ -105,10 +102,15 @@ describe("habitStats", () => {
 
   it("respeita o arquivamento", () => {
     const archived = habit({ archivedAt: new Date(2026, 8, 3, 8, 0) });
-    const stats = habitStats(archived, ["2026-09-01", "2026-09-03"], {
-      start: "2026-09-01",
-      end: "2026-09-30",
-    }, "2026-09-10");
+    const stats = habitStats(
+      archived,
+      ["2026-09-01", "2026-09-03"],
+      {
+        start: "2026-09-01",
+        end: "2026-09-30",
+      },
+      "2026-09-10",
+    );
     expect(stats).toEqual({ done: 1, eligible: 2 });
   });
 });

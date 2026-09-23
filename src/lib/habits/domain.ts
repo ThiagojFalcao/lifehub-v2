@@ -32,9 +32,7 @@ export function isHabitActiveOn(habit: HabitLike, date: string): boolean {
 
 export function eligibleDates(habit: HabitLike, today: string): string[] {
   const start = toDateString(habit.createdAt);
-  const archivedEnd = habit.archivedAt
-    ? addDays(toDateString(habit.archivedAt), -1)
-    : today;
+  const archivedEnd = habit.archivedAt ? addDays(toDateString(habit.archivedAt), -1) : today;
   const end = archivedEnd > today ? today : archivedEnd;
   const dates: string[] = [];
   for (let date = start; date <= end; date = addDays(date, 1)) dates.push(date);
