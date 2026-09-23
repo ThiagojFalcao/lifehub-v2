@@ -14,6 +14,7 @@
     "seed": "tsx scripts/seed.ts",
     "e2e": "playwright test",
     "e2e:prepare": "tsx scripts/prepare-e2e.ts",
+    "backup": "tsx scripts/backup.ts",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
