@@ -1,9 +1,11 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -19,7 +21,8 @@ export default function LoginPage() {
       setLoading(false);
       return;
     }
-    window.location.href = "/";
+    router.push("/");
+    router.refresh();
   }
 
   return (
