@@ -1,7 +1,7 @@
 # LifeHub V2 — Spec do Ciclo 2: MVP fatia 1 (habit tracker)
 
 **Data:** 2026-09-23
-**Status:** Ciclo 2 implementado e verificado em 2026-09-23 — Tasks 1–13 de 13; CI verde
+**Status:** Ciclo 2 implementado e verificado em 2026-09-23 (13 de 13 tasks; CI verde)
 **Ciclo:** 2 de 3 (Fundação → MVP fatia 1 → MVP fatia 2)
 **Contexto:** `docs/01-briefing-projeto.md` (§3–§5, §9–§10), `docs/pesquisa-cientifica.md`, ADRs (`docs/adr/`) e spec do Ciclo 1 (`docs/superpowers/specs/2026-09-23-fundacao-lifehub-v2-design.md`)
 **Depende de:** Ciclo 1 concluído e verificado (11/11 tasks; CI verde; `main` em `cfd4e4c`)
