@@ -50,6 +50,7 @@ Base científica e decisões em `docs/01-briefing-projeto.md` e `docs/pesquisa-c
 
 - **Ciclo 2 (MVP fatia 1) concluído e verificado em 2026-09-23 — 13 de 13 tasks; CI verde.**
 - **Próximo:** spec do Ciclo 3 (fatia 2 — métricas quantitativas, Regra dos 2 Dias + Floor Plan, check-in emocional, histórico) via superpowers (brainstorming → spec → writing-plans → execução com TDD).
+- **Pedido pendente do criador (2026-09-23):** melhorar o dashboard inspirado numa referência visual (matriz hábitos × dias do mês + resumo de produtividade) — brainstormar antes de implementar.
 - **Antes de expor o app** (Tailscale): trocar a senha de teste do login — a senha usada no seed ficou pública no histórico do repo (procedimento em `docs/runbook.md`).
 - Contexto e decisões: `docs/01-briefing-projeto.md` (§9–§10), ADRs em `docs/adr/`, spec do Ciclo 2 em `docs/superpowers/specs/2026-09-23-mvp-fatia-1-design.md` e plano (concluído) em `docs/superpowers/plans/2026-09-23-mvp-fatia-1.md`.
 - Comandos: `npm run dev`, `npm test`, `npm run e2e` (porta 3210), `npm run db:migrate`, `npm run seed`, `npm run seed:demo`, `npm run backup`, `npm run check:data`, `npm run lint`, `npm run typecheck`, `npm run build`.
