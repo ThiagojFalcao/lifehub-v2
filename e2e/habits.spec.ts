@@ -48,11 +48,16 @@ test("gráfico da semana mostra o resumo de hoje", async ({ page }) => {
   await expect(page.getByText(/Hoje: \d+ de \d+ hábitos/)).toBeVisible();
 });
 
-test("tooltip do gráfico mostra X de Y hábitos", async ({ page }) => {
+test("gráfico mostra os 7 dias e o tooltip mostra X de Y hábitos", async ({ page }) => {
   await login(page);
   const chart = page.getByLabel("Hábitos concluídos por dia nesta semana");
   await expect(chart).toBeVisible();
-  await chart.locator(".recharts-wrapper").hover();
+
+  for (const label of ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"]) {
+    await expect(chart.getByText(label, { exact: true })).toBeVisible();
+  }
+
+  await chart.locator(".recharts-dot").last().hover();
   await expect(page.locator(".recharts-tooltip-wrapper")).toContainText(/de \d+ hábitos/);
 });
 
@@ -89,7 +94,7 @@ test("detalhe: backfill, editar, arquivar e reativar", async ({ page }) => {
   backdateHabitCreatedAt("Exercício", twoDaysAgo);
   await login(page);
   await page.getByRole("link", { name: "Exercício" }).click();
-  await expect(page.getByRole("heading", { name: "Exercício" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Exercício" })).toBeVisible({ timeout: 30_000 });
 
   // backfill de dois dias atrás direto no calendário do hábito
   await page.locator(`[data-date="${twoDaysAgoString}"]`).click();

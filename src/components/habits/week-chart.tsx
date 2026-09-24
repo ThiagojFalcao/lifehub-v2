@@ -9,14 +9,17 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import type { WeekDay } from "@/lib/habits/domain";
 
 type WeekChartProps = {
-  series: { date: string; active: number; done: number }[];
+  series: WeekDay[];
 };
+
+type ChartDay = Omit<WeekDay, "done"> & { label: string; done: number | null };
 
 type ChartTooltipProps = {
   active?: boolean;
-  payload?: readonly { payload?: { done: number; active: number } }[];
+  payload?: readonly { payload?: ChartDay }[];
 };
 
 function ChartTooltip({ active, payload }: ChartTooltipProps) {
@@ -24,7 +27,7 @@ function ChartTooltip({ active, payload }: ChartTooltipProps) {
   if (!active || !day) return null;
   return (
     <div className="rounded border bg-white px-2 py-1 text-xs shadow">
-      {day.done} de {day.active} hábitos
+      {day.future ? "Ainda por vir" : `${day.done} de ${day.active} hábitos`}
     </div>
   );
 }
@@ -37,8 +40,12 @@ function weekdayLabel(date: string): string {
 }
 
 export function WeekChart({ series }: WeekChartProps) {
-  const today = series.at(-1);
-  const data = series.map((day) => ({ ...day, label: weekdayLabel(day.date) }));
+  const today = series.filter((day) => !day.future).at(-1);
+  const data: ChartDay[] = series.map((day) => ({
+    ...day,
+    label: weekdayLabel(day.date),
+    done: day.future ? null : day.done,
+  }));
 
   return (
     <section aria-label="Hábitos concluídos por dia nesta semana" className="rounded border p-4">
@@ -58,6 +65,7 @@ export function WeekChart({ series }: WeekChartProps) {
               strokeWidth={2}
               dot={{ r: 3 }}
               isAnimationActive={false}
+              connectNulls={false}
             />
           </LineChart>
         </ResponsiveContainer>

@@ -73,7 +73,7 @@ describe("buildMonthOverview", () => {
 });
 
 describe("buildWeekSeries", () => {
-  it("vai de domingo até hoje e ignora dias futuros", () => {
+  it("vai de domingo a sábado, marcando os dias futuros", () => {
     const series = buildWeekSeries(
       [habit({ createdAt: new Date(2026, 8, 21, 12, 0) })],
       [],
@@ -84,8 +84,13 @@ describe("buildWeekSeries", () => {
       "2026-09-21",
       "2026-09-22",
       "2026-09-23",
+      "2026-09-24",
+      "2026-09-25",
+      "2026-09-26",
     ]);
-    expect(series[0]).toMatchObject({ active: 0, done: 0 });
+    expect(series.map((day) => day.future)).toEqual([false, false, false, false, true, true, true]);
+    expect(series[0]).toMatchObject({ active: 0, done: 0, future: false });
+    expect(series[4]).toMatchObject({ future: true });
   });
 });
 

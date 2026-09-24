@@ -19,6 +19,10 @@ export type DayOverview = {
   level: 0 | 1 | 2 | 3;
 };
 
+export type WeekDay = DayOverview & {
+  future: boolean;
+};
+
 export type HabitStats = {
   done: number;
   eligible: number;
@@ -67,10 +71,11 @@ export function buildWeekSeries(
   habits: HabitLike[],
   entries: EntryLike[],
   today: string,
-): DayOverview[] {
-  return weekDates(today)
-    .filter((date) => date <= today)
-    .map((date) => buildDayOverview(habits, entries, date));
+): WeekDay[] {
+  return weekDates(today).map((date) => ({
+    ...buildDayOverview(habits, entries, date),
+    future: date > today,
+  }));
 }
 
 export function habitStats(
